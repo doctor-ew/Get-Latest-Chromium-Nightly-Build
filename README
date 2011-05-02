@@ -1,0 +1,21 @@
+WHAT IT IS:
+If you are a developer you probably need to test your craft on a stable browser. You know, the ones normal customers use.
+
+But if you are a developer, you probably want to test your skills against the latest and greatest version of chrome or maybe just play with the hottest toys.
+
+This script will allow you to pull in the latest Chromium nightly build so you don't have to backup your data and switch channels each time you need to switch.
+
+HOW TO USE:
+To implement, save chromium-nightly.sh someplace accessible.
+
+Register the bash command (chmod u+x chromium-nightly.sh)
+
+The script takes 2 arguments: 1) your OS (mac or linux) -- sorry Windows users. #FAIL
+
+and 2) the subdirectory in your /home/Applications directory 
+
+From there, the script will access the corresponding chromium repository.
+
+Let me know if something don't work (I need to get back to JSConf2011)
+
+

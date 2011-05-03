@@ -1,25 +1,51 @@
 #!/bin/bash
 
-Version=$(echo "$1" | sed -e "s/\([^\.]\+\)/\u\1/g")
+Platform='unknown'
+platform='unknown'
 
-version=$(echo "$1" | tr '[A-Z]' '[a-z]')
+unamestr=`uname`
 
-BASEDIR=http://build.chromium.org/f/chromium/snapshots/$Version/
-cd ~/Applications/$2
+case "$unamestr" in
+	'Darwin')
+		Platform="Mac"
+		platform="mac"
+;;
+
+	'Linux')
+		Platform="Linux"
+		platform="linux"
+;;
+
+	*)
+		if [[ $# == 2 ]]; then
+			Platform=$(echo "$2" | sed -e "s/\([^\.]\+\)/\u\1/g")
+			platform=$(echo "$2" | tr '[A-Z]' '[a-z]')
+		elif [[ $# == 1 ]]; then
+			Platform=$(echo "$1" | sed -e "s/\([^\.]\+\)/\u\1/g")
+			platform=$(echo "$1" | tr '[A-Z]' '[a-z]')
+		fi
+
+;;
+esac
+
+echo "$unamestr :: $Platform : $platform"
+echo
+
+
+BASEDIR=http://build.chromium.org/f/chromium/snapshots/$Platform/
+cd ~/Applications/$1
 
 echo "Downloading number of latest revision"
 REVNUM=`curl -# $BASEDIR/LATEST`
 
 echo "Found latest revision number $REVNUM, starting download"
 
-curl $BASEDIR/$REVNUM/chrome-$version.zip > $REVNUM.zip
+curl $BASEDIR/$REVNUM/chrome-$platform.zip > $REVNUM.zip
 
 echo "Unzipping..."
 unzip $REVNUM.zip 2>&1 > /dev/null
 echo "Done."
 
-echo "Moving to Applications/chrome-$version directory..."
-rm -rf /Applications/Chromium.app/
-mv chrome-$version/Chromium.app/ /Applications/
+echo "Moving to Applications directory..."
 echo "Done, update successful"
 

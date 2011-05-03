@@ -33,7 +33,7 @@ echo
 
 
 BASEDIR=http://build.chromium.org/f/chromium/snapshots/$Platform/
-cd ~/Applications/$1
+cd ~/$1
 
 echo "Downloading number of latest revision"
 REVNUM=`curl -# $BASEDIR/LATEST`

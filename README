@@ -10,11 +10,13 @@ To implement, save chromium-nightly.sh someplace accessible.
 
 Register the bash command (chmod u+x chromium-nightly.sh)
 
-The script takes 2 arguments: 1) your OS (mac or linux) -- sorry Windows users. #FAIL
+The script takes up to 2 [optional] arguments:
 
-and 2) the subdirectory in your /home/Applications directory 
+1) the subdirectory in your /home/Applications directory [OPTIONAL]
 
-From there, the script will access the corresponding chromium repository.
+or 2) your OS (if not mac or linux: i.e., 'linux' if you are on FreeBSD, etc.) -- sorry Windows, 64-bit and other "fringe" users. #FAIL [LARGELY UNNECESSARY]
+
+The script first sniffs the platform. If it does not match Linux or Darwin (OS X.*) it will check for the OS argument (needs to be second if you specify an Application subdir)
 
 Let me know if something don't work (I need to get back to JSConf2011)
 
